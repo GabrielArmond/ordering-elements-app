@@ -8,6 +8,7 @@ export type ElementsSection = {
 export type ElementItem = LinkItem | LinkWithCheckboxesItem | LinkWithColorsItem | LinkWithProductItem | LinkWithImageItem | LinkWithCardItem | SectionItem;
 
 export interface Link {
+  id: string;
   type: "link";
   link: string;
   text: string;

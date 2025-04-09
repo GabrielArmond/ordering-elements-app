@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import { ColorItem, ElementItem, LinkItem, LinkWithImageItem, LinkWithProductItem, TaskItem } from "../types/elements"
+import { Modal as BootstrapModal } from 'bootstrap'
 
 interface Props {
   item: ElementItem | TaskItem | ColorItem | LinkItem | LinkWithProductItem | LinkWithImageItem | null
+  elementId: string
 }
 
-export function Modal({ item }: Props) {
+export function Modal({ item, elementId }: Props) {
   const [formValues, setFormValues] = useState<Record<string, any>>({})
 
   useEffect(() => {
@@ -25,6 +27,48 @@ export function Modal({ item }: Props) {
     }))
   }
 
+  const handleSave = () => {
+    const existingData = JSON.parse(localStorage.getItem('@sortable-elements') || '[]');
+
+    const updatedData = existingData.map((el: any) => {
+      if (el.id === elementId && Array.isArray(el.items)) {
+        const updateSecondLevelItems = el.items.map((child: any) => {
+          if (Array.isArray(child.items)) {
+            const updatedThirdLevelItems = child.items.map((grandchild: any) => {
+              if (grandchild.id === formValues.id) {
+                return { ...formValues };
+              }
+              return grandchild;
+            });
+
+            return {
+              ...child,
+              items: updatedThirdLevelItems,
+            };
+          }
+
+          return child;
+        });
+
+        return {
+          ...el,
+          items: updateSecondLevelItems,
+        };
+      }
+      return el;
+    });
+
+    localStorage.setItem('@sortable-elements', JSON.stringify(updatedData));
+
+    const modalEl = document.getElementById(`exampleModal-${item.text}`);
+    if (modalEl) {
+      const modal = BootstrapModal.getInstance(modalEl);
+      modal?.hide();
+    }
+    alert("✅ Item atualizado com sucesso!");
+    window.location.reload();
+  };
+
   return (
     <div className="modal fade text-black" id={`exampleModal-${item.text}`} tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
@@ -42,6 +86,7 @@ export function Modal({ item }: Props) {
                 <div className="mb-3" key={index}>
                   <label htmlFor={`input-${key}`} className="form-label">{key}</label>
                   <input
+                    disabled={key === 'id' ? true : false}
                     type="text"
                     className="form-control"
                     id={`input-${key}`}
@@ -54,7 +99,7 @@ export function Modal({ item }: Props) {
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-primary" onClick={handleSave}>
               Salvar Alterações
             </button>
           </div>

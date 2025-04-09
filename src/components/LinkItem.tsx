@@ -4,10 +4,11 @@ import { Modal } from "./Modal";
 import { Modal as BootstrapModal } from 'bootstrap'
 
 interface Props {
-  item: LinkItem
+  item: LinkItem;
+  elementId: string;
 }
 
-export function LinkItemComponent({ item }: Props) {
+export function LinkItemComponent({ item, elementId }: Props) {
   const [selectedLinkItem, setLinkItem] = useState<LinkItem | null>(null);
 
   useEffect(() => {
@@ -49,7 +50,7 @@ export function LinkItemComponent({ item }: Props) {
           </div>
         </div>
       </div>
-      <Modal item={selectedLinkItem} />
+      <Modal item={selectedLinkItem} elementId={elementId} />
     </>
   )
 }

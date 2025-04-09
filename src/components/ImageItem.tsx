@@ -4,10 +4,11 @@ import { Modal } from "./Modal";
 import { Modal as BootstrapModal } from 'bootstrap'
 
 interface Props {
-  item: LinkWithImageItem
+  item: LinkWithImageItem;
+  elementId: string;
 }
 
-export function ImagemItem({ item }: Props) {
+export function ImagemItem({ item, elementId }: Props) {
   const [selectedImageItem, setSelectedImageItem] = useState<LinkWithImageItem | null>(null);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export function ImagemItem({ item }: Props) {
             src={item.src} />
         </div>
       </div>
-      <Modal item={selectedImageItem} />
+      <Modal item={selectedImageItem} elementId={elementId} />
     </>
   )
 }

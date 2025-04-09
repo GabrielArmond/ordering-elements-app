@@ -6,9 +6,10 @@ import { Modal as BootstrapModal } from 'bootstrap'
 
 interface Props {
   items: ColorItem[];
+  elementId: string;
 };
 
-export function ColorGrid({ items }: Props) {
+export function ColorGrid({ items, elementId }: Props) {
   const [selectedColor, setSelectedColor] = useState<ColorItem | null>(null);
 
   useEffect(() => {
@@ -49,7 +50,7 @@ export function ColorGrid({ items }: Props) {
           ))}
         </div>
       </div>
-      <Modal item={selectedColor} />
+      <Modal item={selectedColor} elementId={elementId} />
     </>
   );
 };

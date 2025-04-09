@@ -42,7 +42,7 @@ export function PrincipalContent({ children, elements }: Props) {
                         {element.items
                           .filter((item): item is LinkItem => 'value' in item)
                           .map((item, idx) => (
-                            <LinkItemComponent item={item} key={idx} />
+                            <LinkItemComponent item={item} key={idx} elementId="1" />
                           ))}
                       </div>
                     );
@@ -63,10 +63,11 @@ export function PrincipalContent({ children, elements }: Props) {
                                   title={item.text}
                                   items={item.items as TaskItem[]}
                                   indexOffset={idx}
+                                  elementId="2"
                                 />
                               );
                             } else if (item.text === "Grade de cores") {
-                              return <ColorGrid key={idx} items={item.items as ColorItem[]} />;
+                              return <ColorGrid key={idx} items={item.items as ColorItem[]} elementId="2" />;
                             }
                             return null;
                           })}
@@ -83,7 +84,7 @@ export function PrincipalContent({ children, elements }: Props) {
                           {element.items
                             .filter((item): item is LinkWithProductItem => 'product' in item)
                             .map((item, idx) => (
-                              <ProductItem item={item} key={idx} />
+                              <ProductItem item={item} key={idx} elementId="3" />
                             ))}
                         </div>
                       </div>
@@ -98,7 +99,7 @@ export function PrincipalContent({ children, elements }: Props) {
                         {element.items
                           .filter((item): item is LinkWithImageItem => 'src' in item)
                           .map((item, idx) => (
-                            <ImagemItem item={item} key={idx} />
+                            <ImagemItem item={item} key={idx} elementId="4" />
                           ))}
                       </div>
                     );
@@ -112,7 +113,7 @@ export function PrincipalContent({ children, elements }: Props) {
                         {element.items
                           .filter((item): item is LinkWithCardItem => 'subText' in item && 'src' in item && 'alt' in item && 'buttons' in item)
                           .map((item, idx) => (
-                            <CardItem item={item} key={idx} />
+                            <CardItem item={item} key={idx} elementId="5" />
                           ))}
                       </div>
                     );

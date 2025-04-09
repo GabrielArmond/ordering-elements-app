@@ -1,5 +1,3 @@
-
-// import { useState } from "react";
 import { useEffect, useState } from "react";
 import { TaskItem } from "../types/elements";
 import { Modal } from "./Modal";
@@ -9,10 +7,12 @@ interface Props {
   title: string;
   items: TaskItem[];
   indexOffset?: number;
+  elementId: string;
 };
 
-export function TaskList({ title, items, indexOffset = 0 }: Props) {
+export function TaskList({ title, items, indexOffset = 0, elementId }: Props) {
   const [selectedTask, setSelectedTask] = useState<TaskItem | null>(null);
+  const [localTasks, setLocalTasks] = useState<TaskItem[]>(items);
 
   useEffect(() => {
     if (selectedTask) {
@@ -26,10 +26,18 @@ export function TaskList({ title, items, indexOffset = 0 }: Props) {
 
       return () => clearTimeout(timer);
     }
-  }, [selectedTask]);
+
+    setLocalTasks(items);
+  }, [selectedTask, items]);
 
   const handleOpenModal = (task: TaskItem) => {
     setSelectedTask(task);
+  };
+
+  const handleChange = (index: number, checked: boolean) => {
+    const updated = [...localTasks];
+    updated[index].value = checked.toString();
+    setLocalTasks(updated);
   };
 
   return (
@@ -57,6 +65,8 @@ export function TaskList({ title, items, indexOffset = 0 }: Props) {
                         className="form-check-input"
                         id={`formCheck-${indexOffset}-${i}`}
                         value={task.value}
+                        checked={localTasks[i].value === "true"}
+                        onChange={e => handleChange(i, e.target.checked)}
                       />
                       <label
                         className="form-check-label"
@@ -70,7 +80,7 @@ export function TaskList({ title, items, indexOffset = 0 }: Props) {
           </ul>
         </div>
       </div>
-      <Modal item={selectedTask} />
+      <Modal item={selectedTask} elementId={elementId} />
     </>
   );
 };

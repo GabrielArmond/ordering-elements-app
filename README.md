@@ -2,6 +2,10 @@
 
 Este é um aplicativo construído com **Vite + React + TypeScript**, que permite a **edição dinâmica de componentes** através de uma interface amigável com **drag-and-drop**.
 
+### 🛠 Teste o app
+
+- **[Ordering Elements App](https://ordering-elements-app.vercel.app/)**
+
 ### 🚀 Tecnologias Utilizadas
 
 - **[Vite](https://vitejs.dev/)** – Build tool ultra-rápida para desenvolvimento moderno com React.

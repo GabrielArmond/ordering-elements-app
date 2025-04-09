@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LinkItem } from "../types/elements";
 import { Modal } from "./Modal";
 import { Modal as BootstrapModal } from 'bootstrap'
@@ -10,10 +10,22 @@ interface Props {
 export function LinkItemComponent({ item }: Props) {
   const [selectedLinkItem, setLinkItem] = useState<LinkItem | null>(null);
 
+  useEffect(() => {
+    if (selectedLinkItem) {
+      const timer = setTimeout(() => {
+        const modalElement = document.getElementById(`exampleModal-${selectedLinkItem.text}`);
+        if (modalElement) {
+          const modal = new BootstrapModal(modalElement);
+          modal.show();
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [selectedLinkItem]);
+
   const handleOpenModal = (linkItem: LinkItem) => {
     setLinkItem(linkItem);
-    const modal = new BootstrapModal(document.getElementById("exampleModal")!);
-    modal.show();
   };
   return (
     <>

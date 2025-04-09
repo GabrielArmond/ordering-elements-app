@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ColorItem } from "../types/elements";
 import { Modal } from "./Modal";
 import { Modal as BootstrapModal } from 'bootstrap'
@@ -11,10 +11,22 @@ interface Props {
 export function ColorGrid({ items }: Props) {
   const [selectedColor, setSelectedColor] = useState<ColorItem | null>(null);
 
+  useEffect(() => {
+    if (selectedColor) {
+      const timer = setTimeout(() => {
+        const modalElement = document.getElementById(`exampleModal-${selectedColor.text}`);
+        if (modalElement) {
+          const modal = new BootstrapModal(modalElement);
+          modal.show();
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [selectedColor]);
+
   const handleOpenModal = (color: ColorItem) => {
     setSelectedColor(color);
-    const modal = new BootstrapModal(document.getElementById("exampleModal")!);
-    modal.show();
   };
 
   return (

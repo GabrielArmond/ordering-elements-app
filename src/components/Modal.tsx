@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { ColorItem, ElementItem, LinkItem, LinkWithImageItem, LinkWithProductItem, TaskItem } from "../types/elements"
 
 interface Props {
@@ -5,9 +6,27 @@ interface Props {
 }
 
 export function Modal({ item }: Props) {
-  console.log(item)
+  const [formValues, setFormValues] = useState<Record<string, any>>({})
+
+  useEffect(() => {
+    if (item) {
+      setFormValues({ ...item })
+    }
+  }, [item])
+
+  if (!item) {
+    return null
+  }
+
+  const handleChange = (key: string, value: any) => {
+    setFormValues(prev => ({
+      ...prev,
+      [key]: value,
+    }))
+  }
+
   return (
-    <div className="modal fade text-black" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal fade text-black" id={`exampleModal-${item.text}`} tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
@@ -16,30 +35,28 @@ export function Modal({ item }: Props) {
           </div>
           <div className="modal-body">
             <small>
-              Os campos devem ser referentes ao conteúdo dos Elementos
-              editáveis do bloco escolhido.
+              <small>Campos disponíveis do item:</small>
             </small>
             <form className="mt-4">
-              <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">Subtítulo</label>
-                <input type="email" className="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">Título</label>
-                <input type="email" className="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">Class do Ícone</label>
-                <input type="email" className="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" />
-              </div>
+              {Object.entries(formValues).map(([key, value], index) => (
+                <div className="mb-3" key={index}>
+                  <label htmlFor={`input-${key}`} className="form-label">{key}</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id={`input-${key}`}
+                    value={value}
+                    onChange={(e) => handleChange(key, e.target.value)}
+                  />
+                </div>
+              ))}
             </form>
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" className="btn btn-primary">Salvar Alterações</button>
+            <button type="button" className="btn btn-primary">
+              Salvar Alterações
+            </button>
           </div>
         </div>
       </div>

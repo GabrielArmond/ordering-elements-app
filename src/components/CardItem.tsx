@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LinkWithCardItem } from "../types/elements"
 import { Modal } from "./Modal"
 import { Modal as BootstrapModal } from 'bootstrap'
@@ -10,12 +10,22 @@ interface Props {
 export function CardItem({ item }: Props) {
   const [selectedCardItem, setSelectedCardItem] = useState<LinkWithCardItem | null>(null);
 
+  useEffect(() => {
+    if (selectedCardItem) {
+      const timer = setTimeout(() => {
+        const modalElement = document.getElementById(`exampleModal-${selectedCardItem.text}`);
+        if (modalElement) {
+          const modal = new BootstrapModal(modalElement);
+          modal.show();
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [selectedCardItem]);
+
   const handleOpenModal = (card: LinkWithCardItem) => {
-
     setSelectedCardItem(card);
-
-    const modal = new BootstrapModal(document.getElementById("exampleModal")!);
-    modal.show();
   };
 
   return (

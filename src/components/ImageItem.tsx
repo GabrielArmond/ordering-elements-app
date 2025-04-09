@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LinkWithImageItem } from "../types/elements";
 import { Modal } from "./Modal";
 import { Modal as BootstrapModal } from 'bootstrap'
@@ -10,10 +10,22 @@ interface Props {
 export function ImagemItem({ item }: Props) {
   const [selectedImageItem, setSelectedImageItem] = useState<LinkWithImageItem | null>(null);
 
+  useEffect(() => {
+    if (selectedImageItem) {
+      const timer = setTimeout(() => {
+        const modalElement = document.getElementById(`exampleModal-${selectedImageItem.text}`);
+        if (modalElement) {
+          const modal = new BootstrapModal(modalElement);
+          modal.show();
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [selectedImageItem]);
+
   const handleOpenModal = (image: LinkWithImageItem) => {
     setSelectedImageItem(image);
-    const modal = new BootstrapModal(document.getElementById("exampleModal")!);
-    modal.show();
   };
 
   return (

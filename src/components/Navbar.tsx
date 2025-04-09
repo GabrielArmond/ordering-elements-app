@@ -50,7 +50,7 @@ export function Navbar({ elements, setElements }: Props) {
   return (
     <>
       <nav className="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary navbar-dark"
-        style={{ width: "300px" }}>
+        style={{ minWidth: "250px" }}>
         <div className="container-fluid d-flex flex-column p-0">
           <a className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
             <div className="sidebar-brand-icon rotate-n-15"><i className="fas fa-layer-group"></i></div>
@@ -69,12 +69,6 @@ export function Navbar({ elements, setElements }: Props) {
               </SortableContext>
             </div>
           </DndContext>
-          <div className="nav-item" style={{ padding: "15px", marginTop: "1rem" }}>
-            <button type="button" className="btn btn-success text-light fw-bold" data-bs-toggle="modal"
-              data-bs-target="#exampleModal">
-              Modelo de Modal de Componente
-            </button>
-          </div>
           <div className="nav-item" style={{ padding: "15px" }}>
             <button
               type="button"

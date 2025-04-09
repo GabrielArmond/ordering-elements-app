@@ -1,6 +1,6 @@
 
 // import { useState } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TaskItem } from "../types/elements";
 import { Modal } from "./Modal";
 import { Modal as BootstrapModal } from 'bootstrap'
@@ -14,10 +14,22 @@ interface Props {
 export function TaskList({ title, items, indexOffset = 0 }: Props) {
   const [selectedTask, setSelectedTask] = useState<TaskItem | null>(null);
 
+  useEffect(() => {
+    if (selectedTask) {
+      const timer = setTimeout(() => {
+        const modalElement = document.getElementById(`exampleModal-${selectedTask.text}`);
+        if (modalElement) {
+          const modal = new BootstrapModal(modalElement);
+          modal.show();
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [selectedTask]);
+
   const handleOpenModal = (task: TaskItem) => {
     setSelectedTask(task);
-    const modal = new BootstrapModal(document.getElementById("exampleModal")!);
-    modal.show();
   };
 
   return (

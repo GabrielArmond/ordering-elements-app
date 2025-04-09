@@ -1,54 +1,77 @@
-# React + TypeScript + Vite
+## 🛠 Projeto: Ordering Elements App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um aplicativo construído com **Vite + React + TypeScript**, que permite a **edição dinâmica de componentes** através de uma interface amigável com **drag-and-drop**.
 
-Currently, two official plugins are available:
+### 🚀 Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **[Vite](https://vitejs.dev/)** – Build tool ultra-rápida para desenvolvimento moderno com React.
+- **React + TypeScript** – Biblioteca para construção de interfaces com tipagem estática.
+- **[DND Kit](https://dndkit.com/)** – Biblioteca de drag and drop extensível e acessível.
+- **[Bootstrap 5](https://getbootstrap.com/)** – Framework CSS para layout responsivo e estilização.
+- **LocalStorage** – Utilizado para persistência dos dados de layout no navegador.
+- **Mock de dados** – Um mock de dados inicial foi carregado ao iniciar o projeto.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🎨 Funcionalidades
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- 🧩 Componentes organizados por categorias (links, cards, tarefas, cores, etc.)
+- ✍️ Edição dinâmica dos componentes por meio de modais.
+- 🔄 Salvamento do layout com persistência via `localStorage`.
+- 📦 Sistema de drag-and-drop para reordenar a navbar (e futuramente outros elementos).
+- 🔍 Barra de busca para filtrar os componentes dinamicamente.
+- 💡 Interface adaptada com Bootstrap para visual moderno e responsivo.
+
+---
+
+### 📁 Estrutura de Pastas
+
+```
+src/
+├── api/
+│    └── endpoints/
+│      └── elements.ts
+│   └── client.ts
+│   └── index.ts
+├── components/
+├── assets/
+├── types/
+│   └── elements.ts
+├── hooks/
+│   └── useElementsData.ts
+├── App.tsx
+├── main.tsx
+├── index.css
+└── mock/
+    └── elements.ts (mock de dados)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### ▶️ Como rodar localmente
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+1. Clone o repositório:
+```bash
+git clone https://github.com/GabrielArmond/ordering-elements-app.git
+cd ordering-elements-app
 ```
+
+2. Instale as dependências:
+```bash
+npm install
+```
+
+3. Rode a aplicação:
+```bash
+npm run dev
+```
+
+---
+
+### ✏️ Em Desenvolvimento
+
+- 📦 Implementar novos blocos editáveis.
+- 🛠️ Melhorias de acessibilidade e UX dos modais.
+
+
+

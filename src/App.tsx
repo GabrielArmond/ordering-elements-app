@@ -5,24 +5,17 @@ import { Navbar } from './components/Navbar'
 import { useElementsData } from './hooks/useElementsData'
 import { useEffect, useState } from 'react'
 import { ElementsSection } from './types/elements'
-import { getElementsData, putNewElementOrder } from './api'
+
 
 function App() {
   const { data, error } = useElementsData()
-  const [elements, setElements] = useState<ElementsSection[] | null>(null)
+  const [elements, setElements] = useState<ElementsSection[]>([])
 
   useEffect(() => {
     if (data) {
       setElements(data)
     }
-  }, [data, elements])
-
-  const handleReorder = async (newOrder: ElementsSection[]) => {
-    await putNewElementOrder(newOrder)
-
-    const data = await getElementsData()
-    setElements(data)
-  }
+  }, [data])
 
   if (error) {
     return (
@@ -38,7 +31,7 @@ function App() {
 
   return (
     <div id="wrapper">
-      <Navbar elements={elements} onReorder={handleReorder} />
+      <Navbar elements={elements} setElements={setElements} />
       <PrincipalContent elements={elements}>
         <Footer />
       </PrincipalContent>

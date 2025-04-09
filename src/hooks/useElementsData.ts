@@ -1,30 +1,20 @@
-import { useEffect, useState } from "react"
-import { getElementsData } from "../api"
+import { useState } from "react"
 import { ElementsSection } from "../types/elements";
+import { MOCK_ELEMENTS } from "../mock/elements";
 
 export const useElementsData = () => {
-  const [data, setData] = useState<ElementsSection[] | null>(null)
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [data] = useState<ElementsSection[]>(() => {
+    const elementsLocalStorage = localStorage.getItem('@sortable-elements');
 
-  useEffect(() => {
-    const fetchElements = async () => {
-      try {
-        const response = await getElementsData()
-        setData(response)
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          setError(error)
-        } else {
-          setError(new Error("Erro desconhecido ao carregar os elementos"))
-        }
-      } finally {
-        setLoading(false)
-      }
+    if (!elementsLocalStorage) {
+      return MOCK_ELEMENTS;
     }
 
-    fetchElements()
-  }, [])
+    return JSON.parse(elementsLocalStorage)
+  });
 
-  return { data, loading, error }
+  const [error] = useState<Error | null>(null);
+
+
+  return { data, error }
 }

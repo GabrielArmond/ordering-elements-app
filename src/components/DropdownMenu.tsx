@@ -22,7 +22,6 @@ export function DropdownMenu({ id, element }: Props) {
   const [selectedElementItem, setSelectedElementItem] = useState<ElementItem | null>(null);
 
   const handleOpenModal = (item: ElementItem) => {
-    console.log('Aqui', item)
     setSelectedElementItem(item);
     const modal = new BootstrapModal(document.getElementById("exampleModal")!);
     modal.show();

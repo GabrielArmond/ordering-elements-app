@@ -9,8 +9,11 @@ interface Props {
 
 export function CardItem({ item }: Props) {
   const [selectedCardItem, setSelectedCardItem] = useState<LinkWithCardItem | null>(null);
+
   const handleOpenModal = (card: LinkWithCardItem) => {
+
     setSelectedCardItem(card);
+
     const modal = new BootstrapModal(document.getElementById("exampleModal")!);
     modal.show();
   };

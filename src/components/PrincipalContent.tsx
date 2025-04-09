@@ -41,12 +41,11 @@ export function PrincipalContent({ children, elements }: Props) {
             <div className="text-start d-sm-flex justify-content-between align-items-center mb-4">
               <h3 className="text-dark mb-0">Elementos</h3>
             </div>
-
             {elements.map((element) => {
               switch (element.id) {
                 case '1':
                   return (
-                    <div className="row my-2" key={element.id}>
+                    <div className="row my-4" key={element.id}>
                       <div className="col-xxl-12">
                         <h1>{element.title}</h1>
                       </div>
@@ -60,7 +59,7 @@ export function PrincipalContent({ children, elements }: Props) {
 
                 case '2':
                   return (
-                    <div className="row my-2" key={element.id}>
+                    <div className="row my-4" key={element.id}>
                       <div className="col-xxl-12">
                         <h1>{element.title}</h1>
                       </div>
@@ -86,7 +85,7 @@ export function PrincipalContent({ children, elements }: Props) {
 
                 case '3':
                   return (
-                    <div className="row my-2" key={element.id}>
+                    <div className="row my-4" key={element.id}>
                       <div className="col-xxl-12">
                         <h1>{element.title}</h1>
                       </div>
@@ -102,7 +101,7 @@ export function PrincipalContent({ children, elements }: Props) {
 
                 case '4':
                   return (
-                    <div className="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3 my-2" style={{ marginTop: "0px" }} key={element.id}>
+                    <div className="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3 my-4" style={{ marginTop: "0px" }} key={element.id}>
                       <div className="col-xxl-12">
                         <h1>{element.title}</h1>
                       </div>
@@ -132,9 +131,9 @@ export function PrincipalContent({ children, elements }: Props) {
                   return null;
               }
             })}
-            {children}
           </div>
         }
+        {children}
       </div>
     </div>
   )

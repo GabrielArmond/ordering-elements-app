@@ -8,19 +8,7 @@ export const getElementsData = async (): Promise<ElementsSection[]> => {
 }
 
 export const putNewElementOrder = async (newOrder: ElementsSection[]): Promise<void> => {
-  try {
-    const { data: current } = await client.get('/elements')
+  const newOrderString = JSON.stringify(newOrder);
 
-    // Remove todos os elementos antigos
-    await Promise.all(current.map((item: ElementsSection) =>
-      client.delete(`/elements/${item.id}`)
-    ))
-
-    // Adiciona os elementos na nova ordem
-    await Promise.all(newOrder.map(item =>
-      client.post('/elements', item)
-    ))
-  } catch (error) {
-    console.error('❌ Erro ao atualizar elementos:', error);
-  }
+  localStorage.setItem("@sortable-elements", newOrderString);
 };

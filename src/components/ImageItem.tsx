@@ -19,7 +19,7 @@ export function ImagemItem({ item }: Props) {
   return (
     <>
       <div className="col-xxl-6 pointer" onClick={() => handleOpenModal(item)}>
-        <div className="card">`
+        <div className="card">
           <img className="card-img-top w-100 d-block fit-cover" style={{ height: "380px" }}
             src={item.src} />
         </div>

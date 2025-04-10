@@ -23,6 +23,7 @@ Este é um aplicativo construído com **Vite + React + TypeScript**, que permite
 - ✍️ Edição dinâmica dos componentes por meio de modais.
 - 🔄 Salvamento do layout com persistência via `localStorage`.
 - 📦 Sistema de drag-and-drop para reordenar a navbar (e futuramente outros elementos).
+- 💡 Alertas quando layout for atualizado.
 - 🔍 Barra de busca para filtrar os componentes dinamicamente.
 - 💡 Interface adaptada com Bootstrap para visual moderno e responsivo.
 

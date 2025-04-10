@@ -44,6 +44,7 @@ export interface SectionItem extends Link {
 };
 
 export interface LinkWithProductItem extends Link {
+  src: string;
   product: {
     name: string;
     description: string;

@@ -7,6 +7,7 @@ export const useElementsData = () => {
     const elementsLocalStorage = localStorage.getItem('@sortable-elements');
 
     if (!elementsLocalStorage) {
+      localStorage.setItem("@sortable-elements", JSON.stringify(MOCK_ELEMENTS));
       return MOCK_ELEMENTS;
     }
 

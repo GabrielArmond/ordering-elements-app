@@ -45,6 +45,10 @@ export function Modal({ item, elementId }: Props) {
               ...child,
               items: updatedThirdLevelItems,
             };
+          } else {
+            if (child.id === formValues.id) {
+              return { ...formValues };
+            }
           }
 
           return child;
@@ -85,14 +89,31 @@ export function Modal({ item, elementId }: Props) {
               {Object.entries(formValues).map(([key, value], index) => (
                 <div className="mb-3" key={index}>
                   <label htmlFor={`input-${key}`} className="form-label">{key}</label>
-                  <input
-                    disabled={key === 'id' ? true : false}
-                    type="text"
-                    className="form-control"
-                    id={`input-${key}`}
-                    value={value}
-                    onChange={(e) => handleChange(key, e.target.value)}
-                  />
+                  {typeof value === "object" && value !== null ? (
+                    <textarea
+                      className="form-control"
+                      id={`input-${key}`}
+                      rows={4}
+                      value={JSON.stringify(value, null, 2)}
+                      onChange={(e) => {
+                        try {
+                          const parsed = JSON.parse(e.target.value)
+                          handleChange(key, parsed)
+                        } catch (err) {
+                          console.warn("JSON inválido", err)
+                        }
+                      }}
+                    />
+                  ) : (
+                    <input
+                      disabled={key === 'id'}
+                      type="text"
+                      className="form-control"
+                      id={`input-${key}`}
+                      value={value}
+                      onChange={(e) => handleChange(key, e.target.value)}
+                    />
+                  )}
                 </div>
               ))}
             </form>

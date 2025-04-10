@@ -53,7 +53,7 @@ export function CardItem({ item, elementId }: Props) {
                   </div>
                 </div>
                 <div className="col-md-6 order-first order-md-last" style={{ minHeight: "250px" }}>
-                  <img className="w-100 h-100 fit-cover" src="./src/assets/placeholder.png" />
+                  <img className="w-100 h-100 fit-cover" src={item.src} />
                 </div>
               </div>
             </div>

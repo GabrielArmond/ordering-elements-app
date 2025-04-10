@@ -122,7 +122,7 @@ export const MOCK_ELEMENTS = [
         "type": "link",
         "link": "#",
         "text": "Produto 1",
-        "src": "./src/assets/placeholder.png",
+        "src": "/placeholder.png",
         "product": {
           "name": "Nome do Produto 1",
           "description": "Descrição do Produto"
@@ -133,7 +133,7 @@ export const MOCK_ELEMENTS = [
         "type": "link",
         "link": "#",
         "text": "Produto 2",
-        "src": "./src/assets/placeholder.png",
+        "src": "/placeholder.png",
         "product": {
           "name": "Nome do Produto 2",
           "description": "Descrição do Produto"
@@ -144,7 +144,7 @@ export const MOCK_ELEMENTS = [
         "type": "link",
         "link": "#",
         "text": "Produto 3",
-        "src": "./src/assets/placeholder.png",
+        "src": "/placeholder.png",
         "product": {
           "name": "Nome do Produto 3",
           "description": "Descrição do Produto"
@@ -155,7 +155,7 @@ export const MOCK_ELEMENTS = [
         "type": "link",
         "link": "#",
         "text": "Produto 4",
-        "src": "./src/assets/placeholder.png",
+        "src": "/placeholder.png",
         "product": {
           "name": "Nome do Produto 4",
           "description": "Descrição do Produto"
@@ -173,14 +173,14 @@ export const MOCK_ELEMENTS = [
         "type": "link",
         "link": "#",
         "text": "Imagem 1",
-        "src": "./src/assets/placeholder.png"
+        "src": "/placeholder.png"
       },
       {
         "id": "img-2",
         "type": "link",
         "link": "#",
         "text": "Imagem 2",
-        "src": "./src/assets/placeholder.png"
+        "src": "/placeholder.png"
       }
     ]
   },
@@ -195,7 +195,7 @@ export const MOCK_ELEMENTS = [
         "link": "#",
         "text": "Título",
         "subText": "Subtítulo",
-        "src": "./src/assets/placeholder.png",
+        "src": "/placeholder.png",
         "alt": "Imagem 1",
         "buttons": [
           {
